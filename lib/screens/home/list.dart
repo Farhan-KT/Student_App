@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:student_app/db/functions/db_functions.dart';
 import 'package:student_app/db/model/data_model.dart';
@@ -21,6 +23,7 @@ class _MyWidgetState extends State<MyWidget> {
         appBar: AppBar(
           title: Text("STUDENT LIST"),
           backgroundColor: Colors.green[400],
+          centerTitle: true,
           actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
         ),
         body: ValueListenableBuilder(
@@ -31,21 +34,14 @@ class _MyWidgetState extends State<MyWidget> {
                 itemBuilder: (ctx, index) {
                   final data = studentList[index];
                   return ListTile(
-                    title: Text("NAME :" + data.name,
-                        style: TextStyle(color: Colors.black)),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "AGE     :" + data.age,
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        Text("CLASS :" + data.clas,
-                            style: TextStyle(color: Colors.black)),
-                        Text("PLACE :" + data.address,
-                            style: TextStyle(color: Colors.black)),
-                      ],
-                    ),
+                    leading: CircleAvatar(
+                        radius: 30,
+                        backgroundImage: data.image != null
+                            ? FileImage(File(data.image!))
+                            : AssetImage('assets/profile.png')
+                                as ImageProvider),
+                    title: Text(data.name),
+                    subtitle: Text(data.age),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [

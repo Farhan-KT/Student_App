@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
 import 'dart:io';
-
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:student_app/db/functions/db_functions.dart';
@@ -35,7 +34,7 @@ class _EditScreenState extends State<EditScreen> {
   final TextEditingController classController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
 
-  File? selectedimage;
+  File? _selectedimage;
   @override
   void initState() {
     nameController.text = widget.name;
@@ -43,7 +42,7 @@ class _EditScreenState extends State<EditScreen> {
     classController.text = widget.clas;
     addressController.text = widget.address;
 
-    selectedimage = widget.image != null ? File(widget.image) : null;
+    _selectedimage = widget.image != null ? File(widget.image) : null;
     super.initState();
   }
 
@@ -55,6 +54,7 @@ class _EditScreenState extends State<EditScreen> {
         appBar: AppBar(
           title: const Text("EDIT DETAILS"),
           backgroundColor: Colors.green[400],
+          centerTitle: true,
         ),
         body: Column(
           children: [
@@ -64,7 +64,7 @@ class _EditScreenState extends State<EditScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'S T U D E N T',
+                    'STUDENT DETAILS',
                     style: TextStyle(
                       color: Colors.green[400],
                       fontSize: 20,
@@ -81,12 +81,14 @@ class _EditScreenState extends State<EditScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const CircleAvatar(
+                      CircleAvatar(
                         radius: 80,
-                        // backgroundImage: selectedimage != null
-                        //     ? FileImage(selectedimage!)
-                        // : AssetImage("assets/images/profile.png")
-                        // as ImageProvider),
+                        backgroundImage: _selectedimage != null
+                            ? FileImage(_selectedimage!)
+                            : null,
+                        child: _selectedimage == null
+                            ? Icon(Icons.person, size: 60, color: Colors.grey)
+                            : null,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -96,7 +98,7 @@ class _EditScreenState extends State<EditScreen> {
                                   backgroundColor: MaterialStatePropertyAll(
                                       Colors.green[400])),
                               onPressed: () {
-                                // fromgallery();
+                                fromgallery();
                               },
                               child: const Text('GALLERY')),
                           ElevatedButton(
@@ -104,7 +106,7 @@ class _EditScreenState extends State<EditScreen> {
                                   backgroundColor: MaterialStatePropertyAll(
                                       Colors.green[400])),
                               onPressed: () {
-                                // fromcam();
+                                fromcam();
                               },
                               child: const Text('CAMERA')),
                         ],
@@ -217,7 +219,7 @@ class _EditScreenState extends State<EditScreen> {
     final edited_clas = classController.text.trim();
     final edited_address = addressController.text.trim();
 
-    final edited_image = selectedimage?.path;
+    final edited_image = _selectedimage?.path;
 
     if (edited_name.isEmpty ||
         edited_age.isEmpty ||
@@ -232,14 +234,6 @@ class _EditScreenState extends State<EditScreen> {
         address: edited_address,
         image: edited_image!);
     editstudent(widget.index, updated);
-    EditScreen(
-      index: 0,
-      name: '',
-      address: '',
-      age: '',
-      clas: '',
-      image: '',
-    );
 
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
       content: Text('Updated Successfully'),
@@ -255,7 +249,7 @@ class _EditScreenState extends State<EditScreen> {
         await ImagePicker().pickImage(source: ImageSource.gallery);
 
     setState(() {
-      selectedimage = File(returnedimage!.path);
+      _selectedimage = File(returnedimage!.path);
     });
   }
 
@@ -263,7 +257,7 @@ class _EditScreenState extends State<EditScreen> {
     final returnedimage =
         await ImagePicker().pickImage(source: ImageSource.camera);
     setState(() {
-      selectedimage = File(returnedimage!.path);
+      _selectedimage = File(returnedimage!.path);
     });
   }
 }

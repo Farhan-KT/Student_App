@@ -31,6 +31,7 @@ class _ScreenState extends State<ScreenList> {
         appBar: AppBar(
           title: Text("ADD DETAILS"),
           backgroundColor: Colors.green[400],
+          centerTitle: true,
         ),
         body: Padding(
           padding: const EdgeInsets.only(top: 40, left: 10, right: 10),
@@ -70,23 +71,27 @@ class _ScreenState extends State<ScreenList> {
                           child: Text('C A M E R A')),
                     ],
                   ),
-                  TextFormField(
-                    controller: _nameController,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.person,
-                        color: Colors.green[900],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: TextFormField(
+                      controller: _nameController,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.person,
+                          color: Colors.green[900],
+                        ),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0)),
+                        hintText: 'NAME',
                       ),
-                      border: OutlineInputBorder(),
-                      hintText: 'NAME',
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "value is empty";
+                        } else {
+                          return null;
+                        }
+                      },
                     ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "value is empty";
-                      } else {
-                        return null;
-                      }
-                    },
                   ),
                   SizedBox(
                     height: 10,
@@ -99,7 +104,8 @@ class _ScreenState extends State<ScreenList> {
                     decoration: InputDecoration(
                         prefixIcon:
                             Icon(Icons.calendar_month, color: Colors.blue),
-                        border: OutlineInputBorder(),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0)),
                         hintText: 'AGE'),
                     maxLength: 3,
                     validator: (value) {
@@ -117,7 +123,8 @@ class _ScreenState extends State<ScreenList> {
                           Icons.school,
                           color: Colors.black,
                         ),
-                        border: OutlineInputBorder(),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0)),
                         hintText: 'CLASS'),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -135,7 +142,8 @@ class _ScreenState extends State<ScreenList> {
                     decoration: InputDecoration(
                         prefixIcon:
                             Icon(Icons.location_on, color: Colors.red[900]),
-                        border: OutlineInputBorder(),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0)),
                         hintText: 'PLACE'),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
