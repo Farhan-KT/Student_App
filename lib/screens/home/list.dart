@@ -5,6 +5,7 @@ import 'package:student_app/db/functions/db_functions.dart';
 import 'package:student_app/db/model/data_model.dart';
 import 'package:student_app/screens/home/add.dart';
 import 'package:student_app/screens/home/edit.dart';
+import 'package:student_app/screens/home/profile.dart';
 
 class MyWidget extends StatefulWidget {
   final Key? key;
@@ -21,7 +22,7 @@ class _MyWidgetState extends State<MyWidget> {
     getAllStudents();
     return Scaffold(
         appBar: AppBar(
-          title: Text("STUDENT LIST"),
+          title: const Text("STUDENT LIST"),
           backgroundColor: Colors.green[400],
           centerTitle: true,
           actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
@@ -34,11 +35,14 @@ class _MyWidgetState extends State<MyWidget> {
                 itemBuilder: (ctx, index) {
                   final data = studentList[index];
                   return ListTile(
+                    onTap: () {
+                      userprofile(context, data);
+                    },
                     leading: CircleAvatar(
                         radius: 30,
                         backgroundImage: data.image != null
                             ? FileImage(File(data.image!))
-                            : AssetImage('assets/profile.png')
+                            : const AssetImage('assets/profile.png')
                                 as ImageProvider),
                     title: Text(data.name),
                     subtitle: Text(data.age),
@@ -64,7 +68,8 @@ class _MyWidgetState extends State<MyWidget> {
                             color: Colors.blue,
                           ),
                         ),
-                        SizedBox(width: 16), // Add some space between icons
+                        const SizedBox(
+                            width: 16), // Add some space between icons
                         IconButton(
                           onPressed: () {
                             deleteStudent(index);
@@ -87,10 +92,20 @@ class _MyWidgetState extends State<MyWidget> {
         floatingActionButton: FloatingActionButton.extended(
             backgroundColor: Colors.green[400],
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: ((context) => ScreenList())));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: ((context) => const ScreenList())));
             },
             label: Text("ADD STUDENT"),
-            icon: Icon(Icons.person_add)));
+            icon: const Icon(Icons.person_add)));
+  }
+
+  userprofile(BuildContext context, StudentModel student) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ProfileScreen(user: student),
+        ));
   }
 }
