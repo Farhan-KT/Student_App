@@ -71,19 +71,44 @@ class _ScreenState extends State<ScreenList> {
                           child: Text('C A M E R A')),
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: TextFormField(
-                      controller: _nameController,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(
-                          Icons.person,
-                          color: Colors.green[900],
+                  Column(children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: TextFormField(
+                        controller: _nameController,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.person,
+                            color: Colors.green[900],
+                          ),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20.0)),
+                          hintText: 'NAME',
                         ),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20.0)),
-                        hintText: 'NAME',
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "value is empty";
+                          } else {
+                            return null;
+                          }
+                        },
                       ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
+                      controller: _ageController,
+                      decoration: InputDecoration(
+                          prefixIcon:
+                              Icon(Icons.calendar_month, color: Colors.blue),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20.0)),
+                          hintText: 'AGE'),
+                      maxLength: 3,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return "value is empty";
@@ -92,67 +117,44 @@ class _ScreenState extends State<ScreenList> {
                         }
                       },
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                    ],
-                    controller: _ageController,
-                    decoration: InputDecoration(
-                        prefixIcon:
-                            Icon(Icons.calendar_month, color: Colors.blue),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20.0)),
-                        hintText: 'AGE'),
-                    maxLength: 3,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "value is empty";
-                      } else {
-                        return null;
-                      }
-                    },
-                  ),
-                  TextFormField(
-                    controller: _classController,
-                    decoration: InputDecoration(
-                        prefixIcon: Icon(
-                          Icons.school,
-                          color: Colors.black,
-                        ),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20.0)),
-                        hintText: 'CLASS'),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "value is empty";
-                      } else {
-                        return null;
-                      }
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    controller: _addressController,
-                    decoration: InputDecoration(
-                        prefixIcon:
-                            Icon(Icons.location_on, color: Colors.red[900]),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20.0)),
-                        hintText: 'PLACE'),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "value is empty";
-                      } else {
-                        return null;
-                      }
-                    },
-                  ),
+                    TextFormField(
+                      controller: _classController,
+                      decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.school,
+                            color: Colors.black,
+                          ),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20.0)),
+                          hintText: 'CLASS'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "value is empty";
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      controller: _addressController,
+                      decoration: InputDecoration(
+                          prefixIcon:
+                              Icon(Icons.location_on, color: Colors.red[900]),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20.0)),
+                          hintText: 'PLACE'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "value is empty";
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                  ]),
                   SizedBox(
                     height: 10,
                   ),
@@ -166,8 +168,9 @@ class _ScreenState extends State<ScreenList> {
                                   builder: (context) => MyWidget()));
                         }
                       },
-                      style: ElevatedButton.styleFrom(primary: Colors.green),
-                      label: Text("ADD STUDENT"),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green),
+                      label: Text("ADD"),
                       icon: Icon(Icons.add))
                 ],
               ),
