@@ -126,7 +126,7 @@ class _ScreenState extends State<ScreenList> {
                           ),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20.0)),
-                          hintText: 'CLASS'),
+                          hintText: 'COURSE'),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return "value is empty";

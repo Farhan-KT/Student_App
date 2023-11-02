@@ -157,7 +157,7 @@ class _EditScreenState extends State<EditScreen> {
                               color: Colors.black,
                             ),
                             border: OutlineInputBorder(),
-                            hintText: 'CLASS',
+                            hintText: 'COURSE',
                           ),
                         ),
                       ),

@@ -24,23 +24,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             backgroundColor: Colors.white,
             body: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: CircleAvatar(
                     backgroundColor: Colors.green[400],
-                    radius: 90,
+                    radius: 100,
                     child: CircleAvatar(
                       backgroundImage: FileImage(File(widget.user.image!)),
-                      radius: 80,
+                      radius: 90,
                     ),
                   ),
                 ),
                 SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   child: Container(
-                    height: 530,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -132,7 +130,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   child: Row(
                                     children: [
                                       Text(
-                                        "CLASS :",
+                                        "COURSE :",
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 20,
