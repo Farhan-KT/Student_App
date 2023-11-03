@@ -29,10 +29,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   padding: const EdgeInsets.only(top: 20),
                   child: CircleAvatar(
                     backgroundColor: Colors.green[400],
-                    radius: 100,
+                    radius: 90,
                     child: CircleAvatar(
                       backgroundImage: FileImage(File(widget.user.image!)),
-                      radius: 90,
+                      radius: 80,
                     ),
                   ),
                 ),

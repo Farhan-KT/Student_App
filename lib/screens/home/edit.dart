@@ -184,11 +184,8 @@ class _EditScreenState extends State<EditScreen> {
                                 backgroundColor: MaterialStatePropertyAll(
                                     Colors.green[400])),
                             onPressed: () {
+                              Navigator.pop(context);
                               update();
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const MyWidget()));
                             },
                             child: const Text('UPDATE'),
                           ),

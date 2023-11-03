@@ -98,6 +98,7 @@ class _ScreenState extends State<ScreenList> {
                       height: 10,
                     ),
                     TextFormField(
+                      keyboardType: TextInputType.number,
                       inputFormatters: [
                         FilteringTextInputFormatter.digitsOnly,
                       ],
@@ -205,9 +206,9 @@ class _ScreenState extends State<ScreenList> {
       behavior: SnackBarBehavior.floating,
     ));
 
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => MyWidget(),
-    ));
+    // Navigator.of(context).push(MaterialPageRoute(
+    //   builder: (context) => MyWidget(),
+    // ));
   }
 
   // getimage(ImageSource source) async {
