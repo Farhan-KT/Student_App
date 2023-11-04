@@ -205,18 +205,8 @@ class _ScreenState extends State<ScreenList> {
       ),
       behavior: SnackBarBehavior.floating,
     ));
-
-    // Navigator.of(context).push(MaterialPageRoute(
-    //   builder: (context) => MyWidget(),
-    // ));
   }
 
-  // getimage(ImageSource source) async {
-  //   var img = await imagePicker.pickImage(source: source);
-  //   setState(() {
-  //     pickedimage = File(img!.path);
-  //   });
-  // }
   fromgallery() async {
     final returnedimage =
         await ImagePicker().pickImage(source: ImageSource.gallery);

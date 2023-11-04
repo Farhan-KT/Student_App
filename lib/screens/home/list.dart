@@ -23,17 +23,13 @@ class _MyWidgetState extends State<MyWidget> {
 
   loadstudents() async {
     final allstudents = await getAllStudents();
-    // setState(() {
-    //   searchedlist = allstudents;
-    // });
+
     studentListNotifier.value = allstudents;
   }
 
   @override
   void initState() {
     super.initState();
-
-    // searchlistupdate();
     getAllStudents();
     loadstudents();
   }
@@ -91,7 +87,6 @@ class _MyWidgetState extends State<MyWidget> {
                   final displaystudent =
                       searchedlist.isNotEmpty ? searchedlist : studentList;
                   return ListView.builder(
-                      // itemCount: searchedlist.length,
                       itemBuilder: (ctx, index) {
                         final data = displaystudent[index];
 
@@ -136,9 +131,7 @@ class _MyWidgetState extends State<MyWidget> {
                                       color: Colors.blue,
                                     ),
                                   ),
-                                  const SizedBox(
-                                      width:
-                                          16), // Add some space between icons
+                                  const SizedBox(width: 16),
                                   IconButton(
                                     onPressed: () {
                                       deleteStudent(index);
