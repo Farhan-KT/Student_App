@@ -23,16 +23,17 @@ class _MyWidgetState extends State<MyWidget> {
 
   loadstudents() async {
     final allstudents = await getAllStudents();
-    setState(() {
-      searchedlist = allstudents;
-    });
+    // setState(() {
+    //   searchedlist = allstudents;
+    // });
+    studentListNotifier.value = allstudents;
   }
 
   @override
   void initState() {
     super.initState();
 
-    searchlistupdate();
+    // searchlistupdate();
 
     loadstudents();
   }
@@ -90,74 +91,70 @@ class _MyWidgetState extends State<MyWidget> {
                   final displaystudent =
                       searchedlist.isNotEmpty ? searchedlist : studentList;
                   return ListView.builder(
-                    itemCount: searchedlist.length,
-                    itemBuilder: (ctx, index) {
-                      final data = displaystudent[index];
-                      // return ListView.builder(
-                      //   itemCount: displaystudent.length,
-                      //   itemBuilder: (ctx, index) {
-                      //     final data = displaystudent[index];
-                      return Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          elevation: 15,
-                          child: ListTile(
-                            onTap: () {
-                              userprofile(context, data);
-                            },
-                            leading: CircleAvatar(
-                                radius: 30,
-                                backgroundImage: data.image != null
-                                    ? FileImage(File(data.image!))
-                                    : const AssetImage('assets/profile.png')
-                                        as ImageProvider),
-                            title: Text(data.name),
-                            subtitle: Text(data.age),
-                            trailing: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                IconButton(
-                                  onPressed: () {
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => EditScreen(
-                                                  name: data.name,
-                                                  age: data.age,
-                                                  clas: data.clas,
-                                                  address: data.address,
-                                                  image: data.image,
-                                                  index: index,
-                                                )));
-                                  },
-                                  icon: const Icon(
-                                    Icons.edit,
-                                    color: Colors.blue,
+                      // itemCount: searchedlist.length,
+                      itemBuilder: (ctx, index) {
+                        final data = displaystudent[index];
+
+                        return Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            elevation: 15,
+                            child: ListTile(
+                              onTap: () {
+                                userprofile(context, data);
+                              },
+                              leading: CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage: data.image != null
+                                      ? FileImage(File(data.image!))
+                                      : const AssetImage('assets/profile.png')
+                                          as ImageProvider),
+                              title: Text(data.name),
+                              subtitle: Text(data.age),
+                              trailing: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => EditScreen(
+                                                    name: data.name,
+                                                    age: data.age,
+                                                    clas: data.clas,
+                                                    address: data.address,
+                                                    image: data.image,
+                                                    index: index,
+                                                  )));
+                                    },
+                                    icon: const Icon(
+                                      Icons.edit,
+                                      color: Colors.blue,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(
-                                    width: 16), // Add some space between icons
-                                IconButton(
-                                  onPressed: () {
-                                    deleteStudent(index);
-                                  },
-                                  icon: const Icon(
-                                    Icons.delete,
-                                    color: Colors.red,
+                                  const SizedBox(
+                                      width:
+                                          16), // Add some space between icons
+                                  IconButton(
+                                    onPressed: () {
+                                      deleteStudent(index);
+                                    },
+                                    icon: const Icon(
+                                      Icons.delete,
+                                      color: Colors.red,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    },
-
-                    // itemCount: studentList.length
-                  );
+                        );
+                      },
+                      itemCount: displaystudent.length);
                 },
               ),
             ),
