@@ -34,7 +34,7 @@ class _MyWidgetState extends State<MyWidget> {
     super.initState();
 
     // searchlistupdate();
-
+    getAllStudents();
     loadstudents();
   }
 
